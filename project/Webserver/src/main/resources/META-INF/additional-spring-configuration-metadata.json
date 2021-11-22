@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "spring.logging.level.org.hibernate.type.descriptor.sql.BasicBinder",
+      "type": "java.lang.String",
+      "description": "Description for spring.logging.level.org.hibernate.type.descriptor.sql.BasicBinder."
+  }
+] }

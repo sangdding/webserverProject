@@ -1,0 +1,31 @@
+spring:
+  mvc:
+    view:
+      prefix: src/main/webapp/WEB-INF/views
+      suffix: .jsp
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    url: jdbc:mysql://127.0.0.1:3306/project?serverTimezone=UTC
+    password: wjsdudwn2080!
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    open-in-view: false
+    hibernate:
+      format_sql: true
+      show-sql: true
+      ddl-auto: create
+
+  logging:
+    level:
+      org:
+        hibernate:
+#          SQL: debug
+          type:
+            descriptor:
+              sql: trace
+mybatis:
+  mapper-locations: mybatis/mapper/*.xml
+server:
+  port: '8080'
+S
