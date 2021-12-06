@@ -33,4 +33,5 @@ public class UserInfo {
         this.userId = id;
         this.password = password;
     } // 사용자 객체 생성
+
 }
