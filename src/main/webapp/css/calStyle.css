@@ -283,9 +283,10 @@ When it's NOT activated, the fc-button classes won't even be in the DOM.
 }
 .fc .fc-toolbar {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 }
+
 .fc .fc-toolbar.fc-header-toolbar {
     margin-bottom: 1.5em;
 }
@@ -1465,3 +1466,9 @@ A VERTICAL event
     color: inherit; /* natural color for navlinks */
 }
 
+/*내가 추가*/
+.fc-toolbar-chunk {
+    display: inline-block;
+    align-items: center;
+    float:left;
+}
