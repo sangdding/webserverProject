@@ -23,7 +23,7 @@ public class CalendarInfo {
     private Long id; // 달력 PK
 
     @Column(name = "date")
-    private int calDate; //달력 FK ==날짜
+    private String calDate; //달력 FK ==날짜
 
     @Column(name = "diet")
     private String diet; // 그날 식단
@@ -39,7 +39,7 @@ public class CalendarInfo {
     private UserInfo userInfo; // 유저와 일대일 매핑
 
     @Builder
-    public CalendarInfo(int calDate, String diet, String bm){
+    public CalendarInfo(String calDate, String diet, String bm){
         this.calDate=calDate;
         this.diet = diet;
         this.bm = bm;

@@ -37,6 +37,8 @@ public class BristolStoolService {
         bristolStoolRepository.save(BristolStoolInfo.builder()
                 .color(bristolStoolDto.getColor())
                 .shape(bristolStoolDto.getShape())
-                .smell(bristolStoolDto.getSmell()).build());
+                .smell(bristolStoolDto.getSmell())
+                .time(bristolStoolDto.getTime())
+                .build());
     } // 똥 상태정보 저장
 }

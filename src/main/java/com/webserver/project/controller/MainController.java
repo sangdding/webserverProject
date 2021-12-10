@@ -37,12 +37,11 @@ public class MainController {
         Map<String, String> errorInfo = userService.LoginId(userinfo.getUserId(), userinfo.getUserPassword());
         HttpSession session = request.getSession();
         if(!errorInfo.isEmpty()) {
-            return "login";
+            return "redirect:/login";
         }
         userService.setUserName(userinfo, userinfo.getUserId(), userinfo.getUserPassword());
         session.setAttribute(SessionConstants.LOGIN_USER, userinfo);
-        model.addAttribute("user_id", userinfo.getUserName());
-        return "calendar";
+        return "redirect:/calendar";
     }
 
     @RequestMapping(value="/register.do", method = {RequestMethod.POST, RequestMethod.GET})
@@ -51,10 +50,10 @@ public class MainController {
         //만약 에러가 났으면
         if(!errorInfo.isEmpty()) {
             String key = String.valueOf(errorInfo.keySet());
-            return "register";
+            return "redirect:/register";
         } //다시 가입하세용
         userService.save(userinfo); //회원가입 성공!
-        return "login"; //성공했으면 login으로 가즈아!
+        return "redirect:/login"; //성공했으면 login으로 가즈아!
     }
 
     @RequestMapping(value="/logout.do", method = {RequestMethod.POST, RequestMethod.GET})
@@ -63,6 +62,6 @@ public class MainController {
         if(session != null) {
             session.invalidate();
         }
-        return "login";
+        return "redirect:/login";
     }
 }

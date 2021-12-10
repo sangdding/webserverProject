@@ -211,7 +211,7 @@
     </div>
 </div>--%>
 <%
-    out.println("<h1>" + request.getAttribute("user_id") + "님의 달력입니다.</h1>");
+    out.println("<h1>" + request.getAttribute("user_name") + "님의 달력입니다.</h1>");
 %>
 <div id='calendar-wrap'>
     <div id='calendar'></div>

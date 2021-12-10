@@ -6,7 +6,7 @@ import lombok.Setter;
 @Setter
 @Getter
 public class CalendarDto {
-    private int calDate;
+    private String calDate;
     private String diet;
     private String bm;
 }

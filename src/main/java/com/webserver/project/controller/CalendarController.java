@@ -6,6 +6,7 @@ import com.webserver.project.model.dto.CalendarDto;
 import com.webserver.project.model.dto.UserInfoDto;
 import com.webserver.project.service.BristolStoolService;
 import com.webserver.project.service.CalendarService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,28 +18,30 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @Controller
+@RequiredArgsConstructor
 public class CalendarController {
 
-    private CalendarService calendarService;
-    private BristolStoolService bristolStoolService;
+    private final CalendarService calendarService;
+    private final BristolStoolService bristolStoolService;
 
     @RequestMapping(value = "/calendar")//,method = RequestMethod.GET
     public String CalendarView(HttpServletRequest request, Model model) {
-
         HttpSession session = request.getSession();
         UserInfoDto userInfoDto = (UserInfoDto)session.getAttribute(SessionConstants.LOGIN_USER); // 세션에 저장된 유저 정보를 불러온다.
-        model.addAttribute("user_name", userInfoDto.getUserName());
+        if(userInfoDto != null) model.addAttribute("user_name", userInfoDto.getUserName());
         return "calendar";
     }
 
     @RequestMapping(value = "/bmPopup.do", method = {RequestMethod.POST, RequestMethod.GET})
     public String bmPopup(HttpServletRequest request, CalendarDto calendarDto, @Valid BristolStoolDto bristolStoolDto, BindingResult bindingResult) {
+        HttpSession session = request.getSession();
         if(bindingResult.hasErrors()) {
-            return "bmPopup";
+            return "redirect:/bmPopup";
         }
-
+        System.out.println(calendarDto.getCalDate());
+        calendarService.save(calendarDto);
         bristolStoolService.save(bristolStoolDto);
-        return "calendar";
+        return "redirect:/calendar";
     }
 
     @RequestMapping(value = "/bm")
