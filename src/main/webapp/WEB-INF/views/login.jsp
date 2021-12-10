@@ -26,13 +26,23 @@
         align-items: center;
         padding-top: 40px;
         padding-bottom: 40px;
-        background-color: #f5f5f5;
+        background-color: #e6e6e6;
     }
-
+    main {
+        margin-top: 40px;
+        padding: 32px;
+        background: #fff;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        border-radius: 10px;
+        -webkit-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+        -moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+        box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
+    }
     .form-signin {
         width: 100%;
         max-width: 330px;
-        padding: 15px;
+        padding: 30px;
         margin: auto;
     }
 
@@ -58,18 +68,18 @@
     }
 
     .mb-4 {
-        filler: #523e02;
+        filler: #806751;
 
     }
 </style>
 <body class="text-center">
 <main class="form-signin">
+
     <form action="login.do" method="post" class="validation-form" novalidate>
-        <svg>
-            <img class="mb-4" src="${pageContext.request.contextPath}/img/poo-solid.svg" alt="똥" width="72"
-                 height="72">
-        </svg>
-        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+        <img class="mb-4" src="${pageContext.request.contextPath}/img/poo-solid.svg" alt="똥" width="72"
+             height="72">
+
+        <h1 class="h3 mb-3 font-weight-normal">로그인</h1>
 
         <div class="form-floating">
             <input type="text" name="userId" placeholder="아이디를 입력해주세요." class="form-control"/>

@@ -7,11 +7,7 @@
     <style>
         body {
             min-height: 100vh;
-            background: -webkit-gradient(linear, left bottom, right top, from(#92b5db), to(#1d466c));
-            background: -webkit-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
-            background: -moz-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
-            background: -o-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
-            background: linear-gradient(to top right, #92b5db 0%, #1d466c 100%);
+            background-color: #e6e6e6;
         }
 
         .input-form {
@@ -26,6 +22,17 @@
             -moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
             box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
         }
+        .btn-primary{
+            background-color:#806751;
+            border-color:#806751
+        }
+        .btn-primary.focus, .btn-primary:focus {
+            background-color:#806751;
+            border-color:#806751
+        }
+        .input-form{
+            align-items: center;
+        }
     </style>
 
 </head>
@@ -33,6 +40,9 @@
 <div class="container">
     <div class="input-form-backgroud row">
         <div class="input-form col-md-12 mx-auto">
+
+            <img class="mb-4" src="${pageContext.request.contextPath}/img/poo-solid.svg" alt="똥" width="72"
+                 height="72">
             <h4 class="mb-3">회원가입</h4>
             <form class="validation-form" novalidate action="register.do" method="post">
                 <div class="mb-3"><label for="name">이름</label>
