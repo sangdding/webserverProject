@@ -1,22 +1,46 @@
+<%@ page import="com.webserver.project.SessionConstants" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
-<%--<%--%>
-<%--    request.setCharacterEncoding("utf-8");--%>
-<%--    String sessionId = (String)(session.getAttribute("id"));--%>
-<%--    String sessionNm = (String)(session.getAttribute("nm"));--%>
-
-<%--    System.out.println(sessionId);--%>
-
-<%--    if(sessionId == null || sessionId.equals("null")){--%>
-<%--        //out.println("<script>alert('로그인 해주세요');location.href='login.jsp';</script>");--%>
-<%--        response.sendRedirect("login.jsp");--%>
-<%--    }--%>
-<%--%>--%>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset='utf-8' />
-        <!-- 화면 해상도에 따라 글자 크기 대응(모바일 대응) -->
+    <link href='<%=request.getContextPath()%>/css/calendar.css' rel = "stylesheet" />
+    <script src = '<%=request.getContextPath()%>/js/calendar.js'></script>
+    <%-- jquery cdn--%>
+    <script
+            src="https://code.jquery.com/jquery-3.6.0.js"
+            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+            crossorigin="anonymous">
+    </script>
+    <%-- calendar custom --%>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                headerToolbar: {
+                    start: "",
+                    center: 'prev,title,next',
+                    end : 'today'
+                }, //toolbar 설정
+                navLinks: true, //날짜 클릭 가능하게 함
+                navLinkDayClick: function (date, jsEvent) {
+                    var temp = new Date(date);
+                    var result = temp.getFullYear().toString() + (temp.getMonth()+1).toString() + temp.getDate().toString();
+                    localStorage.setItem('date', result); //date값 일시적으로 로컬에 저장
+                    window.open("bmPopup", "장 상태 입력하기", "width = 500, height = 500");
+                }
+            });
+            calendar.render();
+        });
+    </script>
+    <style>
+        h1 {
+            text-align: center;
+        }
+    </style>
+<%--        <!-- 화면 해상도에 따라 글자 크기 대응(모바일 대응) -->
         <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
         <!-- jquery CDN -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -26,11 +50,7 @@
         <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
         <link href='${pageContext.request.contextPath}/css/calStyle.css' rel='stylesheet' />
         <script src='${pageContext.request.contextPath}/js/calender.js'></script>
-
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
-
     <script>
-
         document.addEventListener('DOMContentLoaded', function() {
             var containerEl = document.getElementById('external-events-list');
             new FullCalendar.Draggable(containerEl, {
@@ -45,9 +65,9 @@
 
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 headerToolbar: {
-                    left: ' today',
-                    center: 'prev,title,next',
-                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                    left: "",
+                    center: 'prev title next',
+                    right: 'today'
                 },
                 navLinks: true, // can click day/week names to navigate views
                 // selectable: true,
@@ -131,6 +151,7 @@
     </script>
     <style>
 
+
         #external-events {
             position: fixed;
             z-index: 2;
@@ -149,7 +170,6 @@
             margin: 1em 0;
             cursor: move;
         }
-
         #calendar {
             max-width: 1400px;
             margin: 20px auto;
@@ -164,20 +184,22 @@
             height: 35px;
             border-radius: 3px;
             width: 157px;
-
         }
         .event-icon {
             width: 24px;
         }
-    </style>
+    </style> --%>
 </head>
 <body>
-
-<div id='wrap'>
-
+<%
+    if (session.getAttribute(SessionConstants.LOGIN_USER) == null) {
+        out.println("<script>alert('로그인을 먼저 해 주세요!');</script>");
+        out.println("<script>location.href='login'</script>");
+    }
+%>
+<%--<div id='wrap'>
     <div id='external-events'>
         <h4>장 상태</h4>
-
         <div id='external-events-list'>
             <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
                 <div class='fc-event-bm'>오늘의 장 상태</div>
@@ -185,17 +207,29 @@
             <div class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
                 <div class='fc-event-diet'>오늘의 식단</div>
             </div>
-
-            </div>
         </div>
-
     </div>
-
-    <div id='calendar-wrap'>
-        <div id='calendar'></div>
-    </div>
-
+</div>--%>
+<%
+    out.println("<h1>" + request.getAttribute("user_id") + "님의 달력입니다.</h1>");
+%>
+<div id='calendar-wrap'>
+    <div id='calendar'></div>
 </div>
-
+<div id="go-to-condition-bm">
+    <a href="bm">
+        <button type="button">장 상태 통계창</button>
+    </a>
+</div>
+<div id="go-to-condition-diet">
+    <a href="diet">
+        <button type="button">식단 상태 통계창</button>
+    </a>
+</div>
+<div id="logout">
+    <form action = "logout.do">
+        <button type="submit">로그아웃</button>
+    </form>
+</div>
 </body>
 </html>

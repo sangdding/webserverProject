@@ -1,17 +1,13 @@
 package com.webserver.project.service;
 
-import com.webserver.project.model.UserInfo;
-import com.webserver.project.model.UserInfoDto;
+import com.webserver.project.model.entity.UserInfo;
+import com.webserver.project.model.dto.UserInfoDto;
 import com.webserver.project.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.apache.catalina.User;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpSession;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 @RequiredArgsConstructor
 @Service
@@ -36,6 +32,11 @@ public class UserService {
             errorResult.put("error", "비밀번호가 존재하지 않습니다.");
         }
         return errorResult;
+    }
+
+    public UserInfoDto setUserName(UserInfoDto userInfoDto, String id, String password) {
+        userInfoDto.setUserName(userRepository.findByUserIdAndPassword(id, password).getName());
+        return userInfoDto;
     }
 
     public void save(UserInfoDto userInfoDto) {

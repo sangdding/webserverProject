@@ -1,4 +1,4 @@
-package com.webserver.project.model;
+package com.webserver.project.model.dto;
 
 import lombok.Getter;
 import lombok.Setter;

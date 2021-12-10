@@ -1,4 +1,4 @@
-package com.webserver.project.model;
+package com.webserver.project.model.dto;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -7,7 +7,6 @@ import lombok.Setter;
 @Getter
 public class CalendarDto {
     private int calDate;
-    private String userId;
     private String diet;
     private String bm;
 }

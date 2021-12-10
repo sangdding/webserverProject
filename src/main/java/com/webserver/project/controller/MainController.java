@@ -1,16 +1,14 @@
 package com.webserver.project.controller;
 
 import com.webserver.project.SessionConstants;
-import com.webserver.project.model.UserInfoDto;
+import com.webserver.project.model.dto.UserInfoDto;
 import com.webserver.project.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -39,11 +37,12 @@ public class MainController {
         Map<String, String> errorInfo = userService.LoginId(userinfo.getUserId(), userinfo.getUserPassword());
         HttpSession session = request.getSession();
         if(!errorInfo.isEmpty()) {
-            session.setAttribute("error", errorInfo);
             return "login";
         }
+        userService.setUserName(userinfo, userinfo.getUserId(), userinfo.getUserPassword());
         session.setAttribute(SessionConstants.LOGIN_USER, userinfo);
-        return "main";
+        model.addAttribute("user_id", userinfo.getUserName());
+        return "calendar";
     }
 
     @RequestMapping(value="/register.do", method = {RequestMethod.POST, RequestMethod.GET})
@@ -60,7 +59,6 @@ public class MainController {
 
     @RequestMapping(value="/logout.do", method = {RequestMethod.POST, RequestMethod.GET})
     public String Logout(HttpServletRequest request) {
-
         HttpSession session = request.getSession(false);
         if(session != null) {
             session.invalidate();
