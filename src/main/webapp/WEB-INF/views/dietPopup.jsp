@@ -5,6 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title>식단 추가</title>
+
     <script>
         function selfCloseSubmit()
         {
@@ -25,9 +26,15 @@
 </head>
 <body>
 <form action="dietPopup.do" method="post" name="info">
-    <input type="text" name="diet" placeholder="오늘의 식단" style="width: 300px; height: 200px; font-size: 20px;">
+    <div class="header">
+        <img class="mb-4" src="${pageContext.request.contextPath}/img/poo-solid.svg" alt="똥" width="50"
+             height="50">
+        <span>오늘 드신 음식을 적어주세요</span>
+    </div>
+
+    <input  id="text" type="text" name="diet" placeholder="">
     <input type="hidden" name="calDate" id = "dateinfo" value="">
-    <input type="button" onclick="javascript:selfCloseSubmit()" value="저장하기"/>
+    <input class="link link--elara" type="button" onclick="javascript:selfCloseSubmit()" value="저장하기">
 </form>
 </body>
 </html>

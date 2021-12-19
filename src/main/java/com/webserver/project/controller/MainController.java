@@ -9,10 +9,14 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Map;
 
 @Controller
@@ -35,12 +39,25 @@ public class MainController {
         return "register";
     }
 
+
     @RequestMapping(value="/login.do", method = {RequestMethod.POST, RequestMethod.GET})
-    public String Login(@Valid UserInfoDto userinfo, BindingResult bindingResult, Model model, HttpServletRequest request) {
+    public String Login(@Valid UserInfoDto userinfo, BindingResult bindingResult, Model model, HttpServletRequest request,HttpServletResponse response) {
         Map<String, String> errorInfo = userService.LoginId(userinfo.getUserId(), userinfo.getUserPassword());
         HttpSession session = request.getSession();
+
         if(!errorInfo.isEmpty()) {
-            return "redirect:/login";
+            response.setContentType("text/html; charset=UTF-8");
+            PrintWriter out = null;
+            try {
+                out = response.getWriter();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            out.println("<script>alert('로그인 정보가 틀립니다'); location.href='/login';</script>");
+            out.flush();
+//            return "redirect:/login";
+
+
         }
         userService.setUserName(userinfo, userinfo.getUserId(), userinfo.getUserPassword());
         session.setAttribute(SessionConstants.LOGIN_USER, userinfo);

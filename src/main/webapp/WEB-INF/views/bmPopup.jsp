@@ -22,7 +22,7 @@
     </script>
     <style>
         body {
-            background-color: #f4e0be;
+            background-color: antiquewhite;
 
         }
         form {
@@ -46,10 +46,11 @@
         }
         select{
             text-align: center;
-            border: none;
+
             margin-top: 15px;
             cursor: pointer;
             margin-right: 20px;
+            border-color: #806751;
         }
         select:hover{
             color: #fff;
@@ -59,8 +60,13 @@
         input {
             /*width: 20px; height: 20px;*/
             text-align: center;
-            border: none;
             cursor: pointer;
+
+        }
+        input#time{
+            border-color: #806751;
+            margin-top: 50px;
+            margin-bottom: 40px;
         }
         input:hover{
             color: #fff;
@@ -93,7 +99,7 @@
         </select>
     </div>
     <div class="input_">
-        <input type="number" name="time" min="0" max="60" placeholder="시간입력(분)">
+        <input id="time" type="number" name="time" min="0" max="60" placeholder="시간입력(분)">
         <input type="hidden" name="calDate" id = "dateinfo" value="">
         <input type="button" onclick="javascript:selfCloseSubmit()" value="저장하기"/>
     </div>

@@ -109,7 +109,6 @@ public class CalendarController {
 
     @RequestMapping(value = "/bm")
     public String bm(CalendarDto calendarDto, Model model) {
-
         return "BristolInfo";
     }
 

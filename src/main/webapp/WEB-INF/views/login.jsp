@@ -67,16 +67,14 @@
 
     }
 
-    .mb-4 {
-        filler: #806751;
-
-    }
+    img{
+        filter: invert(37%) sepia(43%) saturate(297%) hue-rotate(347deg) brightness(102%) contrast(89%);    }
 </style>
 <body class="text-center">
 <main class="form-signin">
 
     <form action="login.do" method="post" class="validation-form" novalidate>
-        <img class="mb-4" src="${pageContext.request.contextPath}/img/poo-solid.svg" alt="똥" width="72"
+        <img class="mb-4" src="${pageContext.request.contextPath}/img/poo-solid.svg" color="#806751 " alt="똥" width="72"
              height="72">
 
         <h1 class="h3 mb-3 font-weight-normal">로그인</h1>
