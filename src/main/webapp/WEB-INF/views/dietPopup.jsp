@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -6,32 +5,29 @@
 <head>
     <meta charset="UTF-8">
     <title>식단 추가</title>
-
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
-    <!-- datepicker -->
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-
+    <script>
+        function selfCloseSubmit()
+        {
+            var f = document.forms.info;
+            opener.name = "parentPage"; //유니크한 이름이어야 합니다.
+            f.target = opener.name;
+            f.submit();
+            self.close();
+        }
+    </script>
+    <script>
+        window.onload = function () {
+            var date = localStorage.getItem('date');//date값 받아오기
+            console.log(date); //form에 날짜정보 넣기
+            document.info.calDate.value = date;
+        }
+    </script>
 </head>
 <body>
-<div class = "group" id = "popupGroup">
-    <div class = "group-head">
-        <h1 class = "zTree-h1"> 식단 추가 </h1>
-    </div>
-    <div class = "group-body">
-        <form id = "scheduleData">
-            <div class = "domain">
-                <h3 class = "zTree-h3"> 머 먹음? </h3>
-            </div>
-            <div class = "domain">
-                <textarea class = "memo" id = "memo" name = "memo" rows = "5" cols = "20" placeholder="100글자까지 입력 가능합니다"></textarea>
-            </div>
-        </form>
-        <button class = "ok-button" type= "button" onclick="click_ok();">확인</button>
-    </div>
-</div>
+<form action="dietPopup.do" method="post" name="info">
+    <input type="text" name="diet" placeholder="오늘의 식단" style="width: 300px; height: 200px; font-size: 20px;">
+    <input type="hidden" name="calDate" id = "dateinfo" value="">
+    <input type="button" onclick="javascript:selfCloseSubmit()" value="저장하기"/>
+</form>
 </body>
 </html>

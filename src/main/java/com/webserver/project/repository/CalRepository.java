@@ -8,4 +8,7 @@ import org.springframework.stereotype.Repository;
 public interface CalRepository extends JpaRepository<CalendarInfo, Long> {
 //    @Modifying
 //    @Query("UDATE Calendar WHERE ")
+    CalendarInfo findByCalDate(String calDate);
+
+    boolean existsByCalDate(String calDate);
 }

@@ -1,8 +1,6 @@
 package com.webserver.project.model.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.apache.catalina.User;
 
 import javax.persistence.*;
@@ -15,34 +13,35 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 public class CalendarInfo {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     @Column(name = "calendar_id")
     private Long id; // 달력 PK
 
     @Column(name = "date")
     private String calDate; //달력 FK ==날짜
 
-    @Column(name = "diet")
-    private String diet; // 그날 식단
-
-    @Column(name = "bm")
-    private String bm; // 그날 배변 상황
+    @OneToMany(mappedBy = "calendarInfo")
+    private List<BristolStoolInfo> bristolStoolInfos = new ArrayList<BristolStoolInfo>(); // 똥 상태와 양방향 매핑
 
     @OneToMany(mappedBy = "calendarInfo")
-    private List<BristolStoolInfo> bristolStoolInfos = new ArrayList<>(); // 똥 상태와 양방향 매핑
+    private List<dietInfo> dietInfos = new ArrayList<dietInfo>(); // 똥 상태와 양방향 매핑
 
     @OneToOne
     @JoinColumn(name = "user_id")
     private UserInfo userInfo; // 유저와 일대일 매핑
 
+    public void setUser(UserInfo userinfo) {
+        this.userInfo = userinfo;
+    }
+
     @Builder
-    public CalendarInfo(String calDate, String diet, String bm){
+    public CalendarInfo(String calDate){
         this.calDate=calDate;
-        this.diet = diet;
-        this.bm = bm;
     } // 달력 객체 생성
 
 }

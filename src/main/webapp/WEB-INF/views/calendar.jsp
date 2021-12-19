@@ -48,7 +48,7 @@
                     var popupX = (window.screen.width / 2) - (popupWidth / 2);
                     var popupY= (window.screen.height / 2) - (popupHeight / 2);
                     // window.open('', '', 'status=no, height=300, width=200, left='+ popupX + ', top='+ popupY);
-                    window.open("bmPopup", "장 상태 입력하기", 'status=no, height=200, width=400, left='+ popupX + ', top='+ popupY);
+                    window.open("selectPopup", "메뉴", "width = 500, height = 500");
                 }
             });
             calendar.render();

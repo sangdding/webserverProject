@@ -4,9 +4,6 @@
     <title>$Title$</title>
 </head>
 <body>
-장 상태 통계창입니다.
-<div>
-    <canvas id="color"></canvas>
-</div>
+diet : ${diet}
 </body>
 </html>

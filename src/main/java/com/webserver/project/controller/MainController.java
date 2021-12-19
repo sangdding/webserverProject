@@ -22,6 +22,9 @@ public class MainController {
 
     private final UserService userService;
 
+    @RequestMapping(value="/")
+    public String WelCome() { return "calendar"; }
+
     @RequestMapping(value = "/login")
     public String LoginView() {
         return "login";
