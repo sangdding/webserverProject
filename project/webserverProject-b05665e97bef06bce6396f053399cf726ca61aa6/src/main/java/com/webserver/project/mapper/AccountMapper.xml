@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.webserver.project.mapper.AccountMapper">
+
+    <select id="readAccount"  parameterType="String" resultType="com.webserver.project.vo.Account">
+        SELECT * FROM member
+        WHERE ID= #{id}
+    </select>
+
+    <select id="readAuthorites"  parameterType="String" resultType="String">
+        SELECT AUTHORITY_NAME
+        FROM member WHERE USERNAME=#{userName}
+    </select>
+
+    <insert id="insertUser" parameterType="com.webserver.project.vo.Member">
+        INSERT member
+		VALUES (
+        #{id},
+        #{password},
+        #{name},
+        #{isAccountNonExpired},
+        #{isAccountNonLocked},
+        #{isCredentialsNonExpired},
+        #{isEnabled}
+        )
+    </insert>
+
+    <insert id="insertUserAuthority" parameterType="com.webserver.project.vo.Authority">
+        INSERT INTO member
+        VALUES (
+            #{userName},
+            #{authorityName}
+            )
+    </insert>
+
+
+
+</mapper>
